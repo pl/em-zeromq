@@ -24,9 +24,8 @@ module EventMachine
       #   ZMQ::ROUTER, ZMQ::DEALER
       # 
       # 
-      def socket(socket_type)
-        zmq_socket = @context.socket(socket_type)
-        
+      def socket(socket_type, socket_options = {})
+        zmq_socket = @context.socket(socket_type, socket_options)
         fd = []
         if zmq_socket.getsockopt(ZMQ::FD, fd) < 0
           raise "Unable to get socket FD: #{ZMQ::Util.error_string}"
